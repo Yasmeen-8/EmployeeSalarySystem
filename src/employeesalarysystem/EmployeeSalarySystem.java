@@ -64,10 +64,10 @@ public class EmployeeSalarySystem {
         
         Employee person;
         switch(input){
-        case 1 -> {person = new SalariedTutor(); empMenu(person); Employees.add(person);}
-        case 2 -> {person = new Administrator(); empMenu(person); Employees.add(person);}
-        case 3 -> {person = new SalariedTutor(); empMenu(person); Employees.add(person);}
-        default ->{addEmployee();}
+        case 1: person = new SalariedTutor(); empMenu(person); Employees.add(person);break;
+        case 2: person = new Administrator(); empMenu(person); Employees.add(person);break;
+        case 3: person = new SalariedTutor(); empMenu(person); Employees.add(person);break;
+        default: addEmployee(); break;
         }
         
         System.out.println("Person added");
@@ -155,26 +155,26 @@ public class EmployeeSalarySystem {
     public static void checknumForEmp(Employee person){
             String input;
             switch(navigation){
-            case 1 -> {
+            case 1:
                 System.out.println("Enter name:");
                 input = Scan.next();
                 person.setName(input);
                 empMenu(person);
-            }
-            case 2 -> {
+            break;
+            case 2: 
                 System.out.println("Enter phone number:");
                 input = Scan.next();
                 person.setPhone(input);
                 empMenu(person);
-            }
-            case 3 -> {
+            break;
+            case 3: 
                 System.out.println("Enter address:");
                 input = Scan.next();
                 person.setAddress(input);
                 empMenu(person);
-            }
-            case 4 -> {menu();}
-            default -> {empMenu(person);}
+            break;
+            case 4 : menu();break;
+            default: empMenu(person); break;
             }
     }
 
