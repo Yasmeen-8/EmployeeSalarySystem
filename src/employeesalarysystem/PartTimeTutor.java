@@ -40,6 +40,9 @@ public class PartTimeTutor extends Employee{
     @Override
     public double calcMonthlySalary(int i){
         double calc = 0;
+        if(i < 0 || i >= monthyRecords.size()){
+            return 0;
+        }
         calc = hourlyRate * monthyRecords.get(i).getHoursWorked();
     return calc;}
 }

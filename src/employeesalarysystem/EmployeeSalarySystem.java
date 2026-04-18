@@ -10,8 +10,7 @@ public class EmployeeSalarySystem {
     static int navigation = 0;
     
     public static void main(String[] args) {
-        System.out.println("System added employees confirm?");
-        String yes = Scan.next();
+        addEmployeesToSystem();
         menu();
       }
     
@@ -34,15 +33,19 @@ public class EmployeeSalarySystem {
         switch(navigation){
             case 1:
                 addEmployee();
+                menu();
             break;
             case 2:
                 recordMonthlyHoursPartTime();
+                menu();
             break;
             case 3:
                 printMonthlySalaryReport();
+                menu();
             break;
             case 4:
                 printPartTimeTutorSalaryHistory();
+                menu();
             break;
             case 5:
                 System.out.println("Thank you for using our system.");
@@ -64,9 +67,9 @@ public class EmployeeSalarySystem {
         
         Employee person;
         switch(input){
-        case 1: person = new SalariedTutor(); empMenu(person); Employees.add(person);break;
-        case 2: person = new Administrator(); empMenu(person); Employees.add(person);break;
-        case 3: person = new SalariedTutor(); empMenu(person); Employees.add(person);break;
+        case 1: person = new SalariedTutor(); Employees.add(person); empMenu(person);break;
+        case 2: person = new Administrator(); Employees.add(person); empMenu(person);break;
+        case 3: person = new PartTimeTutor(); Employees.add(person); empMenu(person);break;
         default: addEmployee(); break;
         }
         
@@ -81,7 +84,12 @@ public class EmployeeSalarySystem {
         System.out.println("Enter employee id:");
         id = Scan.nextInt();
         
-        Employee person = Employees.get(id);
+        Employee person = findEmployeeById(id);
+        if(person == null){
+            System.out.println("No employee found with that id.");
+            recordMonthlyHoursPartTime();
+            return;
+        }
         
         if(person instanceof PartTimeTutor){
             double hours = 0;
@@ -102,11 +110,10 @@ public class EmployeeSalarySystem {
         System.out.println("Printing employees monthly salaries...");
         System.out.println("");
         System.out.println("");
-        addEmployeesToSystem();
-        for(int i = 0; i < Employees.size() - 1; i++){
+        for(int i = 0; i < Employees.size(); i++){
             Employee emp = Employees.get(i);
             System.out.println("---------------------------------------");
-            System.out.println(i + ":  ID = " + emp.getID() + " Name = " + emp.getName() + " Phone = " + emp.getPhone() + "   || Monthly Salary: " + String.valueOf(emp.calcMonthlySalary(i)) );
+            System.out.println(i + ":  ID = " + emp.getID() + " Name = " + emp.getName() + " Phone = " + emp.getPhone() + "   || Monthly Salary: " + String.valueOf(emp.calcMonthlySalary(0)) );
         }
         System.out.println("---------------------------------------");
         System.out.println("");
@@ -120,7 +127,12 @@ public class EmployeeSalarySystem {
         System.out.println("Enter employee id:");
         id = Scan.nextInt();
         
-        Employee emp = Employees.get(id);
+        Employee emp = findEmployeeById(id);
+        if(emp == null){
+            System.out.println("No employee found with that id.");
+            printPartTimeTutorSalaryHistory();
+            return;
+        }
         
         if(emp instanceof PartTimeTutor){
             System.out.println(id + ":  ID = " + emp.getID() + " Name = " + emp.getName() + " Phone = " + emp.getPhone());
@@ -141,13 +153,11 @@ public class EmployeeSalarySystem {
     
     
     public static void empMenu(Employee person){
-    do{
         System.out.println("What information would you like to add?");
         System.out.println("        1: name");
         System.out.println("        2: phone");
         System.out.println("        3: address");
         System.out.println("        4: <--- Return to Main Menu");
-    }while(navigation >= 4 || navigation <= 0);
     navigation = Scan.nextInt();
     checknumForEmp(person);
     }
@@ -173,7 +183,7 @@ public class EmployeeSalarySystem {
                 person.setAddress(input);
                 empMenu(person);
             break;
-            case 4 : menu();break;
+                case 4 : return;
             default: empMenu(person); break;
             }
     }
@@ -204,6 +214,14 @@ public class EmployeeSalarySystem {
         person.setPhone("12341234");
         Employees.add(person);
         }
-    
+    }
+
+    private static Employee findEmployeeById(int id) {
+        for(Employee employee : Employees){
+            if(employee.getID() == id){
+                return employee;
+            }
+        }
+        return null;
     }
 }

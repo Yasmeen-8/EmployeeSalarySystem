@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Employee {
     
+    private static int nextID = 1;
     private int ID;
     private String name;
     private String address;
@@ -12,7 +13,7 @@ public class Employee {
     
     
     public Employee(){
-    ID++;
+    ID = nextID++;
     }
     
     public ArrayList<MonthlyRecord> getMonlthyRecords() {

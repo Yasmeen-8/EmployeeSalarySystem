@@ -35,8 +35,8 @@ public class MonthlyRecord {
     
     public MonthlyRecord(){
         Calendar cal = Calendar.getInstance();
-        year = cal.get(cal.YEAR);
-        month = cal.get(cal.MONTH)+1; 
+        year = cal.get(Calendar.YEAR);
+        month = cal.get(Calendar.MONTH)+1; 
     }
     
     
