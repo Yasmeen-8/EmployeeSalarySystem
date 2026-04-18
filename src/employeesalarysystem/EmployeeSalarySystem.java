@@ -32,22 +32,22 @@ public class EmployeeSalarySystem {
     
     public static void checknum(){
         switch(navigation){
-            case 1 -> {
+            case 1:
                 addEmployee();
-            }
-            case 2 -> {
+            break;
+            case 2:
                 recordMonthlyHoursPartTime();
-            }
-            case 3 -> {
+            break;
+            case 3:
                 printMonthlySalaryReport();
-            }
-            case 4 -> {
+            break;
+            case 4:
                 printPartTimeTutorSalaryHistory();
-            }
-            case 5 -> {
+            break;
+            case 5:
                 System.out.println("Thank you for using our system.");
-                System.exit(0);}
-            default -> {menu();}
+                System.exit(0); break;
+            default: menu(); break;
         }
     }
     
