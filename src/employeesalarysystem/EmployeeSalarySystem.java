@@ -1,14 +1,17 @@
 package employeesalarysystem;
 
+import static java.lang.String.valueOf;
 import java.util.*;
 
 public class EmployeeSalarySystem {
     
-    private static ArrayList<Employee> Employees = new ArrayList<Employee>();
+    static ArrayList<Employee> Employees = new ArrayList<Employee>();
     static Scanner Scan = new Scanner(System.in);
     static int navigation = 0;
     
     public static void main(String[] args) {
+        System.out.println("System added employees confirm?");
+        String yes = Scan.next();
         menu();
       }
     
@@ -99,7 +102,8 @@ public class EmployeeSalarySystem {
         System.out.println("Printing employees monthly salaries...");
         System.out.println("");
         System.out.println("");
-        for(int i = 0; i < Employees.size(); i++){
+        addEmployeesToSystem();
+        for(int i = 0; i < Employees.size() - 1; i++){
             Employee emp = Employees.get(i);
             System.out.println("---------------------------------------");
             System.out.println(i + ":  ID = " + emp.getID() + " Name = " + emp.getName() + " Phone = " + emp.getPhone() + "   || Monthly Salary: " + String.valueOf(emp.calcMonthlySalary(i)) );
@@ -154,20 +158,52 @@ public class EmployeeSalarySystem {
             case 1 -> {
                 System.out.println("Enter name:");
                 input = Scan.next();
-                person.setName(input);}
+                person.setName(input);
+                empMenu(person);
+            }
             case 2 -> {
                 System.out.println("Enter phone number:");
                 input = Scan.next();
                 person.setPhone(input);
+                empMenu(person);
             }
             case 3 -> {
                 System.out.println("Enter address:");
                 input = Scan.next();
                 person.setAddress(input);
+                empMenu(person);
             }
             case 4 -> {menu();}
             default -> {empMenu(person);}
             }
     }
 
+    public static void addEmployeesToSystem(){
+        Double Y = 53.3;
+        for(int i = 0; i < 5; i++){
+        PartTimeTutor person = new PartTimeTutor();
+        person.setName("Person " + valueOf(i));
+        person.setAddress("JHSADKJASH");
+        person.setPhone("12341234");
+        Y = Y*2;
+        person.setHourlyRate(Y);
+        Employees.add(person);
+        }
+        for(int i = 0; i < 5; i++){
+        SalariedTutor person = new SalariedTutor();
+        person.setName("Person " + valueOf(i));
+        person.setAddress("JHSADKJASH");
+        person.setPhone("12341234");
+        person.setMastersHolder(true);
+        Employees.add(person);
+        }
+        for(int i = 0; i < 5; i++){
+        Administrator person = new Administrator();
+        person.setName("Person " + valueOf(i));
+        person.setAddress("JHSADKJASH");
+        person.setPhone("12341234");
+        Employees.add(person);
+        }
+    
+    }
 }
